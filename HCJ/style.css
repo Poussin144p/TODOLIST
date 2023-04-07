@@ -1,0 +1,173 @@
+/* 
+  Organisation
+  1-Positionnement
+  2-Dimensions
+  3-Texte
+  4-Bordures et fonds
+  5-Propriétés CSS3 ou spécifiques navigateurs
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(rgb(233, 233, 233), rgb(187, 187, 187));
+}
+
+h1 {
+  margin: 30px 0;
+  text-align: center;
+  font-size: 30px;
+}
+
+h2 {
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.list-done {
+  width: 70%;
+  max-width: 1200px;
+  min-width: 320px;
+  margin: 20px auto 0;
+  list-style-type: none;
+}
+
+.list-done li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  color: #333;
+  font-size: 15px;
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.list-done li input {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.list-done li button {
+  height: 20px;
+  margin-left: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.list-done button img {
+  width: 20px;
+  pointer-events: none;
+}
+
+.list-done li span {
+  margin-left: 20px;
+  font-size: 15px;
+}
+
+.list-done li.notok span {
+  text-decoration: line-through;
+}
+
+form {
+  display: block;
+  max-width: 1200px;
+  min-width: 320px;
+  width: 70%;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+form .fields {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+form label {
+  display: block;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+form select {
+  width: 50%;
+  margin: 10px 0;
+  padding: 12px 10px;
+  font-size: 15px;
+}
+
+form input {
+  width: 50%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 15px;
+}
+
+form button {
+  padding: 10px;
+  font-size: 15px;
+}
+
+.list-todo {
+  width: 70%;
+  max-width: 1200px;
+  min-width: 320px;
+  margin: 20px auto 0;
+  list-style-type: none;
+}
+
+.list-todo li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 5px 0;
+  padding: 10px;
+  color: #333;
+  font-size: 15px;
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.list-todo li input {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.list-todo li button {
+  height: 20px;
+  margin-left: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.list-todo button img {
+  width: 20px;
+  pointer-events: none;
+}
+
+.list-todo li span {
+  margin-left: 20px;
+  font-size: 15px;
+}
+
+.list-todo li.ok span {
+  text-decoration: line-through;
+}
