@@ -139,16 +139,17 @@ function itemRename(e) {
 }
 
 function itemOk(e) {
+  if (e.target.parentNode.querySelector("#update") !== null )
+    button = e.target.parentNode.querySelector("#update");
   if(e.target.parentNode.getAttribute("status") === "pending") {
     e.target.parentNode.setAttribute("status", "finish");
     e.target.parentNode.setAttribute("class", "ok");
-    console.log(donelist);
-    
+    button.remove();
     donelist.appendChild(e.target.parentNode);
   } else {
     e.target.parentNode.setAttribute("status", "pending");
     e.target.parentNode.setAttribute("class", "tok");
-    console.log(dolist);
+    e.target.parentNode.appendChild(button);
     dolist.appendChild(e.target.parentNode);
   }
 }
@@ -171,7 +172,6 @@ function addTaskInBdd(task) {
 
 function updateItem(e) {
   itemOk(e);
-  itemRename(e);
   const el = e.target.parentNode;
   const id = el.getAttribute("id");
   const status = el.getAttribute("status");
