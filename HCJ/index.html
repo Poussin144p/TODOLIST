@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Todo List</h1>
-    <h2>Gestionnaire de tâches</h2>
 
-    <form>
+    <h1>Todo List</h1>
+
+
+    <form class="drop">
       <label for="item">Ajouter une tâche</label>
       <div class="fields">
         <input type="text" id="item" placeholder="Intitulé de la tâche" />
@@ -25,10 +26,15 @@
 
       <button type="submit">Ajouter</button>
     </form>
-    <label>TODO</label>
-    <ul class="list-todo"></ul>
-    <label>NOT TODO</label>
-    <ul class="list-done"></ul>
+    
+    <div id="tasks" class="drop">
+      <label>TODO</label>
+      <ul class="list-todo" id="list"></ul>
+    </div>
+    <div id="tasks" class="drop">
+      <label>NOT TODO</label>
+      <ul class="list-done" id="list"></ul>
+    </div>
 
     <script src="app.js"></script>
   </body>

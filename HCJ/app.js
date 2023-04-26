@@ -2,7 +2,7 @@
  * Load
  */
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("http://todolistprof/PHP/tasks.php")
+  fetch("http://todolist/PHP/tasks.php")
     .then(function (response) {
       return response.json();
     })
@@ -91,7 +91,7 @@ function deleteItem(e) {
           method: "GET",
           redirect: "follow",
         };
-        fetch("http://todolistprof/PHP/delete-task.php?id="+id, requestOptions)
+        fetch("http://todolist/PHP/delete-task.php?id="+id, requestOptions)
         .then((response) => response.json())
         .catch((error) => console.log("error", error));
         
@@ -126,7 +126,7 @@ function addTaskInBdd(task) {
     redirect: "follow",
   };
 
-  fetch("http://todolistprof/PHP/add-task.php", requestOptions)
+  fetch("http://todolist/PHP/add-task.php", requestOptions)
     .then((response) => response.json())
     .then((tasks) => tasks.map((task) => displayList(task)))
     .catch((error) => console.log("error", error));
@@ -138,7 +138,7 @@ function updateItem(e) {
   const id = el.getAttribute("id");
   const status = el.getAttribute("status");
 
-  const url = ("http://todolistprof/PHP/update-task.php?id="+id+"&status="+status);
+  const url = ("http://todolist/PHP/update-task.php?id="+id+"&status="+status);
 
   var requestOptions = {
     method: "GET",
