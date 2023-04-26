@@ -62,12 +62,21 @@ function displayList(task) {
   txt.innerText = task.task;
   item.appendChild(txt);
 
+  const btnUpd = document.createElement("button");
+  btnUpd.setAttribute("id", "update");
+  btnUpd.addEventListener("click", updateItemName);
   const btn = document.createElement("button");
+  btn.setAttribute("id", "delete");
   btn.addEventListener("click", deleteItem);
   const img = document.createElement("img");
   img.setAttribute("src", "ressources/fermer.svg");
+  const img2 = document.createElement("img");
+  img2.setAttribute("src", "ressources/fermer.svg");
   btn.appendChild(img);
+  btnUpd.appendChild(img2);
   item.appendChild(btn);
+  
+  item.appendChild(btnUpd);
 
   if(item.getAttribute("class") === "ok") {
     donelist.appendChild(item);
@@ -76,6 +85,29 @@ function displayList(task) {
   }
   allItems.push(item);
   
+}
+
+function updateItemName(e) {
+  let id = e.target.parentNode.getAttribute("data-key");
+  let name = e.target.parentNode.querySelector("span").innerText;
+  console.log(name);
+  let nameUpd = prompt("Changer le nom de la tâche");        
+  allItems.forEach((el) => {             
+    if(id === el.getAttribute("data-key")) {                
+      allItems = allItems.filter((li) => li.dataset.key !== el.dataset.key);
+      
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+      fetch("http://todolist/PHP/updateName-task.php?id="+id+"&task="+nameUpd, requestOptions)
+      .then((response) => response.json())
+      .catch((error) => console.log("error", error));
+      
+    }         
+  });   
+  name = nameUpd;       
+  location.reload();
 }
 
 
@@ -102,11 +134,16 @@ function deleteItem(e) {
   }   
 }
 
+function itemRename(e) {
+  e.target.parentNode.querySelector("#update").remove();
+}
+
 function itemOk(e) {
   if(e.target.parentNode.getAttribute("status") === "pending") {
     e.target.parentNode.setAttribute("status", "finish");
     e.target.parentNode.setAttribute("class", "ok");
     console.log(donelist);
+    
     donelist.appendChild(e.target.parentNode);
   } else {
     e.target.parentNode.setAttribute("status", "pending");
@@ -134,6 +171,7 @@ function addTaskInBdd(task) {
 
 function updateItem(e) {
   itemOk(e);
+  itemRename(e);
   const el = e.target.parentNode;
   const id = el.getAttribute("id");
   const status = el.getAttribute("status");

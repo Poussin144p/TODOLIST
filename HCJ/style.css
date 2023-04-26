@@ -167,10 +167,17 @@ option {
 
 #list li button {
   height: 20px;
-  margin-left: auto;
+
   padding: 0;
   background: transparent;
   border: none;
+}
+
+#list #update {
+  margin-left: auto;
+}
+#list #delete {
+  margin-left: 70%;
 }
 
 #list button img {
@@ -181,10 +188,12 @@ option {
 #list li span {
   margin-left: 20px;
   font-size: 15px;
+  min-width: 300;
 }
 
 #list li.ok span {
   text-decoration: line-through;
+  min-width: 300;
 }
 
 #tasks label {

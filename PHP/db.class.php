@@ -68,6 +68,19 @@ class Db {
 
     }
 
+    public function updateNameTask($id, $name) {
+        $sql = "UPDATE tasks SET task=:task WHERE id=:id";
+        $sth = $this->pdo->prepare($sql);
+        $r = $sth->execute(
+            array(
+                "id"=>$id,
+                "task"=>$name,
+            ));
+        if($r) return array($this->getTask($id));
+        else return array("message" => "Erreur de modification dans la base de données");
+
+    }
+
     public function lastInsertId() {
         $sql = "SELECT MAX(id) FROM tasks";
 
