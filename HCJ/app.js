@@ -71,7 +71,7 @@ function displayList(task) {
   const img = document.createElement("img");
   img.setAttribute("src", "ressources/fermer.svg");
   const img2 = document.createElement("img");
-  img2.setAttribute("src", "ressources/fermer.svg");
+  img2.setAttribute("src", "ressources/pencil.png");
   btn.appendChild(img);
   btnUpd.appendChild(img2);
   item.appendChild(btn);
@@ -87,27 +87,34 @@ function displayList(task) {
   
 }
 
+
+
 function updateItemName(e) {
   let id = e.target.parentNode.getAttribute("data-key");
-  let name = e.target.parentNode.querySelector("span").innerText;
+  let name = e.target.parentNode.querySelector("span").innerHTML;
   console.log(name);
-  let nameUpd = prompt("Changer le nom de la tâche");        
-  allItems.forEach((el) => {             
-    if(id === el.getAttribute("data-key")) {                
-      allItems = allItems.filter((li) => li.dataset.key !== el.dataset.key);
-      
-      var requestOptions = {
-        method: "GET",
-        redirect: "follow",
-      };
-      fetch("http://todolist/PHP/updateName-task.php?id="+id+"&task="+nameUpd, requestOptions)
-      .then((response) => response.json())
-      .catch((error) => console.log("error", error));
-      
-    }         
-  });   
-  name = nameUpd;       
-  location.reload();
+  let nameUpd = prompt("Changer le nom de la tâche");   
+  console.log("console :" + nameUpd);
+  if (nameUpd === "null") {
+    return;
+  }
+  if (nameUpd !== "") {
+    allItems.forEach((el) => {             
+      if(id === el.getAttribute("data-key")) {                
+        allItems = allItems.filter((li) => li.dataset.key !== el.dataset.key);
+        
+        var requestOptions = {
+          method: "GET",
+          redirect: "follow",
+        };
+        fetch("http://todolist/PHP/updateName-task.php?id="+id+"&task="+nameUpd, requestOptions)
+        .then((response) => response.json())
+        .catch((error) => console.log("error", error));
+        
+      }         
+    }); 
+    location.reload();  
+  }
 }
 
 
@@ -138,22 +145,6 @@ function itemRename(e) {
   e.target.parentNode.querySelector("#update").remove();
 }
 
-function itemOk(e) {
-  if (e.target.parentNode.querySelector("#update") !== null )
-    button = e.target.parentNode.querySelector("#update");
-  if(e.target.parentNode.getAttribute("status") === "pending") {
-    e.target.parentNode.setAttribute("status", "finish");
-    e.target.parentNode.setAttribute("class", "ok");
-    button.remove();
-    donelist.appendChild(e.target.parentNode);
-  } else {
-    e.target.parentNode.setAttribute("status", "pending");
-    e.target.parentNode.setAttribute("class", "tok");
-    e.target.parentNode.appendChild(button);
-    dolist.appendChild(e.target.parentNode);
-  }
-}
-
 function addTaskInBdd(task) {
   var formdata = new FormData();
   formdata.append("task", task);
@@ -168,6 +159,22 @@ function addTaskInBdd(task) {
     .then((response) => response.json())
     .then((tasks) => tasks.map((task) => displayList(task)))
     .catch((error) => console.log("error", error));
+}
+
+function itemOk(e) {
+  if (e.target.parentNode.querySelector("#update") !== null )
+    button = e.target.parentNode.querySelector("#update");
+  if(e.target.parentNode.getAttribute("status") === "pending") {
+    e.target.parentNode.setAttribute("status", "finish");
+    e.target.parentNode.setAttribute("class", "ok");
+    button.remove();
+    donelist.appendChild(e.target.parentNode);
+  } else {
+    e.target.parentNode.setAttribute("status", "pending");
+    e.target.parentNode.setAttribute("class", "tok");
+    e.target.parentNode.appendChild(button);
+    dolist.appendChild(e.target.parentNode);
+  }
 }
 
 function updateItem(e) {
@@ -186,28 +193,9 @@ function updateItem(e) {
   fetch(url, requestOptions)
     .then((response) => response.json())
     .catch((error) => console.log("error", error));
-  
-
-
-  /**
-   * ...
-   * 
-   * TODO
-   * 
-   * Aide : requête très proche de celle de "addTaskInBdd"
-   * Mais en GET et non en POST
-   * En GET il n'y a pas de formData, mais des paramètres passés directement dans l'URL
-   * Ex page.php?id=12&mode=update
-   * 
-   * Attention à bien conserver requestOptions (mais sans formData et avec le bon verbe HTTP)
-   * 
-   * Une fois la reqête effectuée vous devez simplement definir la class du li pour définir son état
-   * Ceci est déjà dans le code original vu ensemble
-   */
-  
-
-
 }
+
+
 
 function notice(message) {
   alert(message);

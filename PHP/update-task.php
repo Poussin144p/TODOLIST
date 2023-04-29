@@ -10,11 +10,6 @@ header('Access-Control-Allow-Headers: X-Requested-With');
 
 include('db.class.php');
 
-/**
- * TODO
- * 
- * appelez les bonnes methodes de l'objet Db
- */
 $db = new Db();
 $result = $db->updateTask($_GET["id"], $_GET["status"]);
 

@@ -48,14 +48,6 @@ class Db {
     }
 
     public function updateTask($id, $status) {
-        /**
-         * TODO
-         * 
-         * Exemple de requête SQL
-         * UPDATE tasks SET status = :status WHERE id=:id
-         * 
-         * Voir prepare et execute dans addTask pour vous inspirer 
-         */
         $sql = "UPDATE tasks SET status=:status WHERE id=:id";
         $sth = $this->pdo->prepare($sql);
         $r = $sth->execute(
@@ -94,11 +86,7 @@ class Db {
     }
 
     public function deleteTask($id) {
-        /**
-         * TODO
-         * 
-         * A vous de jouer :)
-         */
+
         $sql = "DELETE FROM tasks WHERE id=:id";
 
         $sth = $this->pdo->prepare($sql);

@@ -188,12 +188,12 @@ option {
 #list li span {
   margin-left: 20px;
   font-size: 15px;
-  min-width: 300;
+  min-width: 300px;
 }
 
 #list li.ok span {
   text-decoration: line-through;
-  min-width: 300;
+  min-width: 300px;
 }
 
 #tasks label {
